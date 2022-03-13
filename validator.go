@@ -2,6 +2,7 @@ package validator
 
 import (
 	"reflect"
+	"regexp"
 )
 
 type Scheme map[string]Validation
@@ -74,6 +75,19 @@ func (v *Validation) Len(length int, message string) *Validation {
 func (v *Validation) NotEmpty(message string) *Validation {
 	checkFunction := func(fieldType string, fieldValue interface{}) (string, bool, bool) {
 		return message, fieldType == "string" && len(fieldValue.(string)) > 0, false
+	}
+
+	v.Validators = append(v.Validators, &checkFunction)
+	return v
+}
+
+var emailRegexp = regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+
+// Returns true if string is email
+func (v *Validation) Email(message string) *Validation {
+
+	checkFunction := func(fieldType string, fieldValue interface{}) (string, bool, bool) {
+		return message, fieldType == "string" && emailRegexp.MatchString(fieldValue.(string)), false
 	}
 
 	v.Validators = append(v.Validators, &checkFunction)
