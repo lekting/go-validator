@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/lekting/validator"
+	"github.com/lekting/go-validator"
 )
 
 type RegisterRequest struct {
