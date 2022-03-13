@@ -79,8 +79,8 @@ func TestValidationLenLte(t *testing.T) {
 		t.Fatalf("Error structure is incorrect %v", errors)
 	}
 
-	if errors["UserName"][0] != "must be a string" {
-		t.Fatalf("Message on an error is incorrect `%s`, must be `must be a string`", errors["UserName"][0])
+	if errors["UserName"][0] != "len >= 5" {
+		t.Fatalf("Message on an error is incorrect `%s`, must be `len >= 5`", errors["UserName"][0])
 	}
 }
 

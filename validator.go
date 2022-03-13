@@ -42,8 +42,6 @@ func (v *Validation) String(message string) *Validation {
 
 // Returns true if string length is lower or equal provided length
 func (v *Validation) LenLte(length int, message string) *Validation {
-	v.String("must be a string")
-
 	checkFunction := func(fieldType string, fieldValue interface{}) (string, bool, bool) {
 		return message, fieldType == "string" && len(fieldValue.(string)) <= length, false
 	}
@@ -54,8 +52,6 @@ func (v *Validation) LenLte(length int, message string) *Validation {
 
 // Returns true if string length is greeter or equal provided length
 func (v *Validation) LenGte(length int, message string) *Validation {
-	v.String("must be a string")
-
 	checkFunction := func(fieldType string, fieldValue interface{}) (string, bool, bool) {
 		return message, fieldType == "string" && len(fieldValue.(string)) >= length, false
 	}
@@ -66,8 +62,6 @@ func (v *Validation) LenGte(length int, message string) *Validation {
 
 // Returns true if string length is equal @param length
 func (v *Validation) Len(length int, message string) *Validation {
-	v.String("must be a string")
-
 	checkFunction := func(fieldType string, fieldValue interface{}) (string, bool, bool) {
 		return message, fieldType == "string" && len(fieldValue.(string)) == length, false
 	}
@@ -78,8 +72,6 @@ func (v *Validation) Len(length int, message string) *Validation {
 
 // Returns true if string is not empty
 func (v *Validation) NotEmpty(message string) *Validation {
-	v.String("must be a string")
-
 	checkFunction := func(fieldType string, fieldValue interface{}) (string, bool, bool) {
 		return message, fieldType == "string" && len(fieldValue.(string)) > 0, false
 	}
